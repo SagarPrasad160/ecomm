@@ -12,7 +12,7 @@ let imageValue;
 //  console.log(file);
 // })
 
-imageInputDOM.addEventListener("change", async (e) => {
+imageInputDOM?.addEventListener("change", async (e) => {
   console.log("changed");
   const imageFile = e.target.files[0];
   const formData = new FormData();
@@ -34,14 +34,18 @@ imageInputDOM.addEventListener("change", async (e) => {
   }
 });
 
-fileFormDOM.addEventListener("submit", async (e) => {
+fileFormDOM?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const nameValue = nameInputDOM.value;
   const priceValue = priceInputDOM.value;
   try {
     const product = { name: nameValue, price: priceValue, image: imageValue };
 
-    await axios.post(`${url}/new`, product);
+    const res = await axios.post(`${url}/new`, product);
+    if (res.data.success) {
+      window.location.href = "/admin/products";
+      fileFormDOM.reset(); // Reset the entire form
+    }
   } catch (error) {
     console.log(error);
   }

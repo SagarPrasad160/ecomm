@@ -10,7 +10,7 @@ module.exports = ({ errors }) => {
     <p>${getError(errors, "name")}</p>
     <input type="number" name="price" placeholder="price" id="price" required  />
     <p>${getError(errors, "price")}</p>
-    <input type="file" name="image" id="imageInput" />
+    <input type="file" name="image" id="imageInput" accept="image/*" />
     <p>${getError(errors, "image")}</p>
     <button type="submit">Add</button>
     </form>

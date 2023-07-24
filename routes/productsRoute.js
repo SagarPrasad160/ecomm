@@ -8,10 +8,23 @@ const Product = require("../models/Product");
 const { requireAuth } = require("../middleware/handleErrors");
 
 const newProductTemplate = require("../views/admin/new");
+const layout = require("../views/layout");
 
 router.get("/admin/products", requireAuth, async (req, res) => {
   const products = await Product.find({});
-  res.status(200).send({ products });
+  const productsDOM = products
+    .map((product) => {
+      return `<article class="product">
+    <img src="${product.image}" alt="${product.name}" class="img"/>
+    <footer>
+    <p>${product.name}</p>
+    <span>$${product.price}</span>
+    </footer>
+    </article>`;
+    })
+    .join("");
+  console.log(productsDOM);
+  res.status(200).send(layout({ content: productsDOM }));
 });
 
 router.post(
