@@ -1,11 +1,10 @@
-const url = "/api/products";
-const fileFormDOM = document.querySelector(".file-form");
+const url = "/admin/products";
+const fileFormDOM = document.querySelector("#productForm");
 
 const nameInputDOM = document.querySelector("#name");
 const priceInputDOM = document.querySelector("#price");
-const imageInputDOM = document.querySelector("#image");
+const imageInputDOM = document.querySelector("#imageInput");
 
-const containerDOM = document.querySelector(".container");
 let imageValue;
 
 // imageInputDOM.addEventListener('change',(e)=>{
@@ -14,6 +13,7 @@ let imageValue;
 // })
 
 imageInputDOM.addEventListener("change", async (e) => {
+  console.log("changed");
   const imageFile = e.target.files[0];
   const formData = new FormData();
   formData.append("image", imageFile);
@@ -41,36 +41,8 @@ fileFormDOM.addEventListener("submit", async (e) => {
   try {
     const product = { name: nameValue, price: priceValue, image: imageValue };
 
-    await axios.post(url, product);
-    fetchProducts();
+    await axios.post(`${url}/new`, product);
   } catch (error) {
     console.log(error);
   }
 });
-
-async function fetchProducts() {
-  try {
-    const {
-      data: { products },
-    } = await axios.get(url);
-
-    console.log(products);
-
-    const productsDOM = products
-      .map((product) => {
-        return `<article class="product">
-<img src="${product.image}" alt="${product.name}" class="img"/>
-<footer>
-<p>${product.name}</p>
-<span>$${product.price}</span>
-</footer>
-</article>`;
-      })
-      .join("");
-    containerDOM.innerHTML = productsDOM;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-fetchProducts();

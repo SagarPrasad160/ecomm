@@ -1,7 +1,9 @@
 const { getError } = require("../helpers");
 
+const layout = require("../layout");
+
 module.exports = ({ errors }) => {
-  return `
+  return layout(`
   <form method="POST">
   <input required type="email" placeholder="email" name="email" />
   <p>${getError(errors, "email")}</p>
@@ -9,5 +11,5 @@ module.exports = ({ errors }) => {
   <p>${getError(errors, "password")}</p>
   <button type="submit">Sign In</button>
   </form>
-    `;
+    `);
 };
