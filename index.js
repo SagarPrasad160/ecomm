@@ -2,15 +2,23 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
+const bodyParser = require("body-parser");
 
 const Product = require("./models/Product");
 
 const { validationResult } = require("express-validator");
+const { handleErrors } = require("./middleware/handleErrors");
+
+const signupTemplate = require("./views/admin/signup");
+
 const {
   requireName,
   requirePrice,
   requireImageSrc,
-} = require("./middleware/validators");
+  requireEmail,
+  requirePassword,
+  requirePasswordConfirmation,
+} = require("./validators");
 
 const connect = require("./config/db");
 
@@ -18,8 +26,9 @@ const fileUpload = require("express-fileupload");
 
 // Connect db
 connect();
-// use body parser middleware
 app.use(express.json());
+// use body parser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 
 // serve static assets
@@ -70,6 +79,21 @@ app.post("/api/products/uploads", async (req, res) => {
   await productImage.mv(imagePath);
 
   res.status(200).send({ image: { src: `/uploads/${productImage.name}` } });
+});
+
+app.post(
+  "/signup",
+  [requireEmail, requirePassword, requirePasswordConfirmation],
+  handleErrors(signupTemplate),
+  (req, res) => {
+    const { email, password, confirmPassword } = req.body;
+    console.log(email, password, confirmPassword);
+    res.send({ email, password });
+  }
+);
+
+app.get("/signup", (req, res) => {
+  res.send(signupTemplate({}));
 });
 
 app.listen(PORT, () => {
