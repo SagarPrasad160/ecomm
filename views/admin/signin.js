@@ -1,4 +1,4 @@
-const { getError } = require("../helpers.js");
+const { getError } = require("../helpers");
 
 module.exports = ({ errors }) => {
   return `
@@ -7,9 +7,7 @@ module.exports = ({ errors }) => {
   <p>${getError(errors, "email")}</p>
   <input required type="password" placeholder="password" name="password" />
   <p>${getError(errors, "password")}</p>
-  <input required type="password" placeholder="confirm password" name="confirmPassword" />
-  <p>${getError(errors, "confirmPassword")}</p>
-  <button type="submit">Sign Up</button>
+  <button type="submit">Sign In</button>
   </form>
     `;
 };
