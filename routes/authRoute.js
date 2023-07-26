@@ -52,7 +52,7 @@ router.post(
     try {
       const user = await User.findOne({ email });
       req.session.userId = user._id;
-      res.send(req.session);
+      res.redirect("/admin/products");
     } catch (error) {
       console.log(error);
       res.status(500).send("Server Error");
@@ -62,7 +62,7 @@ router.post(
 
 router.get("/signin", (req, res) => {
   if (req.session.userId) {
-    return res.send(req.session);
+    return res.redirect("/admin/products");
   }
   res.send(signinTemplate({}));
 });

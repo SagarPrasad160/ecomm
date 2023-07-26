@@ -7,8 +7,8 @@ module.exports = ({ products }) => {
         <tr>
           <td class="fw-bold">${product.name}</td>
           <td>$${product.price}</td>
-          <td><button class="btn btn-primary">Edit</button></td>
-          <td><button class="btn btn-danger">Delete</button></td>
+          <td><a href="/admin/products/edit/${product._id}" class="btn btn-primary">Edit</a></td>
+          <td><a href="" class="btn btn-danger">Delete</a></td>
         </tr>
       `;
     })
@@ -16,7 +16,7 @@ module.exports = ({ products }) => {
 
   return layout({
     content: `
-      <div>
+      <div class="mx-5">
         <h1 class="mb-4">Admin Panel</h1>
         <header class="d-flex justify-content-between mb-4">
           <h2>Products</h2>

@@ -1,6 +1,6 @@
 const url = "/admin/products";
 const fileFormDOM = document.querySelector("#productForm");
-
+const productEditForm = document.querySelector("#productEditForm");
 const nameInputDOM = document.querySelector("#name");
 const priceInputDOM = document.querySelector("#price");
 const imageInputDOM = document.querySelector("#imageInput");
@@ -45,6 +45,33 @@ fileFormDOM?.addEventListener("submit", async (e) => {
     if (res.data.success) {
       window.location.href = "/admin/products";
       fileFormDOM.reset(); // Reset the entire form
+    } else {
+      document.body.innerHTML = res.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+productEditForm?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const nameValue = nameInputDOM.value;
+  const priceValue = priceInputDOM.value;
+
+  // Extract the id from the URL
+  const urlParts = window.location.pathname.split("/").filter(Boolean);
+  const productId = urlParts[urlParts.length - 1];
+
+  try {
+    const product = { name: nameValue, price: priceValue, image: imageValue };
+
+    const res = await axios.post(`${url}/edit/${productId}`, product);
+
+    if (res.data.success) {
+      window.location.href = "/admin/products";
+      fileFormDOM.reset(); // Reset the entire form
+    } else {
+      document.body.innerHTML = res.data;
     }
   } catch (error) {
     console.log(error);
