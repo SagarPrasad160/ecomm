@@ -85,4 +85,9 @@ router.get("/admin/products/edit/:id", requireAuth, async (req, res) => {
   res.send(productEditTemplate({ product }));
 });
 
+router.post("/admin/products/:id/delete", requireAuth, async (req, res) => {
+  await Product.findByIdAndDelete(req.params.id);
+  res.redirect("/admin/products");
+});
+
 module.exports = router;
