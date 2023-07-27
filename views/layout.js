@@ -7,9 +7,10 @@ module.exports = ({ content }) => {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Include the layout.js file to create the layout template -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5" data-bs-theme="dark">
+  <nav class="navbar navbar-expand-lg mb-5" data-bs-theme="dark">
     <div class="container-fluid">
       <div class="px-5">
       <a class="navbar-brand" href="#"><i class="fa-solid fa-phone-flip"></i>+1 555 987 6543</a>
@@ -34,7 +35,7 @@ module.exports = ({ content }) => {
   </div>
   </nav>
     <div class="container">
-   ${content}
+      ${content}
    </div>
     <script src="https://kit.fontawesome.com/c03d196568.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>

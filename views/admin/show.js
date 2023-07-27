@@ -9,8 +9,15 @@ module.exports = ({ products }) => {
       <img src="${product.image}" class="card-img-top h-75" alt="product image">
       <div class="card-body">
         <h5 class="card-title">${product.name}</h5>
-        <p class="card-text">$${product.price}</p>
-        <a href="#" class="btn btn-primary">Add to Cart</a>
+        <p class="card-text text-white bg-secondary w-full p-2 fw-bold rounded fs-6 text-center">Now at $${product.price}</p>
+      </div>
+      <div class="card-footer">
+        <form action="/cart" method="POST">
+          <input hidden value="${product._id}" name="productId" />
+          <button class="btn btn-light w-100 h-100">
+              <i class="fa fa-shopping-cart"></i> Add to cart
+          </button>
+        </form>  
       </div>
     </div>
     </div>
@@ -31,6 +38,7 @@ module.exports = ({ products }) => {
     <div class="row mb-5">
       <img src="${`/uploads/banner.jpg`}" />
     </div>
+    <h2 class="mb-4">Featured Items</h2>
     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
       ${renderedProducts} 
     </div>
