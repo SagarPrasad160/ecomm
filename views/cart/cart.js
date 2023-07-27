@@ -14,9 +14,11 @@ module.exports = ({ products }) => {
               </p>
             </div>
             <div>
-              <a href="#">
-                <i class="fa-solid fa-rectangle-xmark fs-2 bg-white text-danger"></i>
-              </a>
+              <form method="POST" action="/cart/${product.product._id}">
+                <button class="btn btn-danger" type="submit">
+                  <i class="fas fa-times"></i>
+                </button>
+              </form>
             </div>
           </div>
         </div>

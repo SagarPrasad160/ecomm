@@ -31,7 +31,7 @@ module.exports = ({ products }) => {
       <h1>Ecomm Shop</h1>
       <nav class="d-flex">
         <a href="/" class="nav-link text-primary fs-5 mx-2"><i class="fa-solid fa-star"></i> Products</a>
-        <a href="/" class="nav-link text-primary fs-5 mx-2"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+        <a href="/cart" class="nav-link text-primary fs-5 mx-2"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
         <a href="/admin/products" class="nav-link text-primary fs-5"><i class="fa-solid fa-user"></i> Admin</a>
       </nav>
     </header>
