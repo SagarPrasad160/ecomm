@@ -9,6 +9,13 @@ const connect = require("./config/db");
 
 const fileUpload = require("express-fileupload");
 
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
+});
+
 const authRoutes = require("./routes/authRoute");
 const productRoutes = require("./routes/productsRoute");
 const uploadRoutes = require("./routes/uploadRoute");
@@ -19,7 +26,7 @@ connect();
 app.use(express.json());
 // use body parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(fileUpload());
+app.use(fileUpload({ useTempFiles: true }));
 
 // serve static assets
 app.use(express.static("./public"));
