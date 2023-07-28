@@ -18,7 +18,7 @@ cloudinary.config({
 
 const authRoutes = require("./routes/authRoute");
 const productRoutes = require("./routes/productsRoute");
-const uploadRoutes = require("./routes/uploadRoute");
+const uploadRoutes = require("./middleware/uploadProductImage");
 const cartRoutes = require("./routes/cartRoute");
 
 // Connect db
@@ -39,7 +39,6 @@ app.use(
 // routes
 app.use(authRoutes);
 app.use(productRoutes);
-app.use(uploadRoutes);
 app.use(cartRoutes);
 
 const PORT = process.env.PORT || 5000;

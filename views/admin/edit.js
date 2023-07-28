@@ -5,7 +5,7 @@ const layout = require("../layout");
 module.exports = ({ product, errors }) => {
   return layout({
     content: `
-    <form method="POST" id="productEditForm" class="mx-5">
+    <form method="POST" id="productEditForm" class="mx-5"  enctype="multipart/form-data">
     <div class="mb-3">
       <label for="name" class="form-label">Product Name</label>
       <input type="text" name="name" class="form-control" placeholder="Product name" id="name" value="${

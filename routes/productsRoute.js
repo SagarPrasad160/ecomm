@@ -1,20 +1,21 @@
 const express = require("express");
 const router = express.Router();
-
-const { requireName, requirePrice, requireImageSrc } = require("../validators");
-const { validationResult } = require("express-validator");
-
 const Product = require("../models/Product");
+
+const { validationResult } = require("express-validator");
+const { requireName, requirePrice, requireImageSrc } = require("../validators");
 const { requireAuth, handleErrors } = require("../middleware/handleErrors");
 
 const newProductTemplate = require("../views/admin/new");
 const productsListTemplate = require("../views/admin/show");
-const adminProductListTemplate = require("../views/admin/products");
+const adminPanelTemplate = require("../views/admin/products");
 const productEditTemplate = require("../views/admin/edit");
+
+const { uploadProductImage } = require("../middleware/uploadProductImage");
 
 router.get("/admin/products", requireAuth, async (req, res) => {
   const products = await Product.find({});
-  res.status(200).send(adminProductListTemplate({ products }));
+  res.status(200).send(adminPanelTemplate({ products }));
 });
 
 router.get("/", async (req, res) => {
@@ -30,18 +31,31 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(404).send({ success: "false", data: errors.array() });
+      return res.status(404).send({ success: false, data: errors.array() });
     }
 
-    const { name, price, image } = req.body;
+    const { name, price } = req.body;
+    let image;
+
+    if (req.files && req.files.image) {
+      // If there is an uploaded image, use the uploadProductImage function to get the image URL
+      try {
+        image = await uploadProductImage(req, res);
+      } catch (error) {
+        console.error(error);
+        return res.status(500).send("Error uploading image");
+      }
+    }
+
     let product = new Product({
       name,
       price,
-      image,
+      image, // Use the image URL obtained from Cloudinary
     });
+
     try {
       product = await product.save();
-      res.send({ success: true, data: product });
+      res.redirect("/admin/products");
     } catch (error) {
       console.log(error);
       res.status(500).send("Something went wrong");
@@ -63,20 +77,26 @@ router.post(
   }),
   async (req, res) => {
     let product = await Product.findById(req.params.id);
-    let upadtedProduct = {};
-    const { name, price, image } = req.body;
-    if (name) upadtedProduct.name = name;
-    if (price) upadtedProduct.price = price;
-    if (image) upadtedProduct.image = image;
-
-    product = await Product.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: upadtedProduct,
-      },
-      { new: true }
-    );
-    res.send({ success: true, data: product });
+    const { name, price } = req.body;
+    product.name = name;
+    product.price = price;
+    if (req.files && req.files.image) {
+      // If there is an uploaded image, use the uploadProductImage function to get the image URL
+      try {
+        image = await uploadProductImage(req, res);
+        product.image = image;
+      } catch (error) {
+        console.error(error);
+        return res.status(500).send("Error uploading image");
+      }
+    }
+    try {
+      product = await product.save();
+      res.redirect("/admin/products");
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("Something went wrong");
+    }
   }
 );
 
