@@ -3,7 +3,7 @@ const router = express.Router();
 const Product = require("../models/Product");
 
 const { validationResult } = require("express-validator");
-const { requireName, requirePrice, requireImageSrc } = require("../validators");
+const { requireName, requirePrice } = require("../validators");
 const { requireAuth, handleErrors } = require("../middleware/handleErrors");
 
 const newProductTemplate = require("../views/admin/new");
@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
 router.post(
   "/admin/products/new",
   requireAuth,
-  [requireName, requirePrice, requireImageSrc],
+  [requireName, requirePrice],
   handleErrors(newProductTemplate),
   async (req, res) => {
     const errors = validationResult(req);
