@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
 const cloudinary = require("cloudinary").v2;
+const fs = require("fs");
 
 const { validationResult } = require("express-validator");
 const { requireName, requirePrice } = require("../validators");
@@ -68,6 +69,7 @@ router.post(
     product.price = price;
     if (req.files && req.files.image) {
       // If there is an uploaded image, use the uploadProductImage function to get the image URL
+      const image = req.files.image;
       try {
         const result = await cloudinary.uploader.upload(image.tempFilePath, {
           use_filename: true,
