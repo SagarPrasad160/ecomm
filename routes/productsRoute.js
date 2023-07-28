@@ -27,25 +27,10 @@ router.post(
   "/admin/products/new",
   requireAuth,
   [requireName, requirePrice],
+  uploadProductImage,
   handleErrors(newProductTemplate),
   async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(404).send({ success: false, data: errors.array() });
-    }
-
-    const { name, price } = req.body;
-    let image;
-
-    if (req.files && req.files.image) {
-      // If there is an uploaded image, use the uploadProductImage function to get the image URL
-      try {
-        image = await uploadProductImage(req, res);
-      } catch (error) {
-        console.error(error);
-        return res.status(500).send("Error uploading image");
-      }
-    }
+    const { name, price, image } = req.body;
 
     let product = new Product({
       name,

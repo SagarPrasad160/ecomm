@@ -13,10 +13,7 @@ module.exports = {
     .toFloat()
     .isFloat({ min: 1 })
     .withMessage("Value must be greater than 1"),
-  requireImageSrc: check("image")
-    .trim()
-    .isLength({ min: 5 })
-    .withMessage("Please provide an Image"),
+
   requireEmail: check("email")
     .trim()
     .normalizeEmail()
