@@ -24,9 +24,9 @@ module.exports = ({ products }) => {
         <h1 class="mb-4">Admin Panel</h1>
         <header class="d-flex justify-content-between mb-4">
           <h2>Products</h2>
-          <ul class="nav justify-content-center">
+          <ul class="nav d-flex justify-content-center">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="">Products</a>
+              <a class="nav-link active" aria-current="page" href="/signout">Signout</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/admin/products/new">New Product</a>

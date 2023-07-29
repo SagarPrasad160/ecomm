@@ -4,8 +4,7 @@ module.exports = ({ products }) => {
   const renderedProducts = products
     .map((product) => {
       return `
-        <li class="list-group-item">
-        <div class="card bg-light">
+        <div class="card bg-light mb-3">
           <div class="card-body d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center w-75 p-2 rounded justify-content-between">
               <p class="card-title fs-3">${product.product.name}</p>
@@ -22,29 +21,44 @@ module.exports = ({ products }) => {
             </div>
           </div>
         </div>
-        </li>
       `;
     })
     .join("");
+  const productTotal = products.reduce((acc, curr) => {
+    return acc + curr.product.price;
+  }, 0);
   return layout({
     content: `
-    <div class="list-group list-group-flush">
-        <h3 class="mb-3">Shopping Cart <i class="fa fa-shopping-cart"></i></h3>
+    <h3 class="mb-3">Shopping Cart <i class="fa fa-shopping-cart"></i></h3>
+    <div class="row row-cols-1 row-cols-md-2">
+      <div class="col">
         ${renderedProducts}
-        <li class="list-group-item">
+      </div>
+      <div class="col">
         <div class="card bg-info">
-        <div class="card-body d-flex justify-content-between align-items-center">
-          <div class="d-flex align-items-center w-75 p-2 rounded justify-content-between">
-            <p class="card-title fs-3 text-white">Total</p>
-          </div>
-          <div>
-            <button class="btn btn-lg btn-success">
+          <div class="card-body d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center w-75 p-2 rounded justify-content-between">
+              <p class="card-title fs-3 text-white">Total: $${productTotal}</p>
+            </div>
+            <div>
+              <button class="btn btn-lg btn-success">
                 Buy
-            </button>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      </li>
+        <div class="mt-3">
+          <div class="d-flex gap-1">
+            <div class="d-grid col-6">
+              <a href="/" class="btn btn-outline-secondary">Back to Home</a>
+            </div>
+            <div class="d-grid col-6"> 
+              <a href="" class="btn btn-outline-secondary">
+                Add Payment Method
+              </a>
+            </div>
+          </div>
+        </div>
     </div>
     `,
   });

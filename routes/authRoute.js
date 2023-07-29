@@ -69,7 +69,7 @@ router.get("/signin", (req, res) => {
 
 router.get("/signout", (req, res) => {
   req.session = null;
-  res.send("Signed out successfully!");
+  res.redirect("/");
 });
 
 module.exports = router;
