@@ -10,29 +10,27 @@ module.exports = ({ content }) => {
     <title>Shop</title>
   </head>
   <body>
-  <nav class="navbar navbar-expand-lg mb-5" data-bs-theme="dark">
-    <div class="container-fluid">
-      <div class="px-5">
-      <a class="navbar-brand" href="#"><i class="fa-solid fa-phone-flip"></i>+1 555 987 6543</a>
-      <a class="navbar-brand" href="#"><i class="fa-solid fa-envelope"></i>shop@myshop.com</a>
-      </div>
+  <nav class="navbar navbar-expand-lg mb-5 d-lg-flex justify-content-between" data-bs-theme="dark">
+    <div class="d-flex flex-lg-row flex-column px-5">
+      <div class="navbar-brand"><i class="fa-solid fa-phone-flip"></i>+1 555 987 6543</div>
+      <div class="navbar-brand"><i class="fa-solid fa-envelope"></i>shop@myshop.com</div>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav px-5">
-      <li class="nav-item">
-        <a class="nav-link text-white fs-5 m-1" href="/"><i class="fa-brands fa-facebook"></i></a>
-      </li>
-      <li class="nav-item">
-      <a class="nav-link text-white fs-5 m-1" href="/"><i class="fa-brands fa-twitter"></i></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-white fs-5 m-1" href="/"><i class="fa-brands fa-linkedin"></i></a>
-      </li>
-    </ul>
-  </div>
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end px-5" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-white fs-5 m-1" href="/"><i class="fa-brands fa-facebook"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white fs-5 m-1" href="/"><i class="fa-brands fa-twitter"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white fs-5 m-1" href="/"><i class="fa-brands fa-linkedin"></i></a>
+        </li>
+      </ul>
+    </div>
   </nav>
     <div class="container">
       ${content}
