@@ -57,7 +57,7 @@ module.exports = {
     .custom(async (password, { req }) => {
       const user = await User.findOne({ email: req.body.email });
       if (!user) {
-        throw new Error("user does not exits");
+        throw new Error("user does not exists");
       }
       const isMatched = await bcrypt.compare(password, user.password);
       if (!isMatched) {
