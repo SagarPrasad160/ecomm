@@ -20,7 +20,6 @@ module.exports = ({ products }) => {
 
   return layout({
     content: `
-      <div class="mx-5">
         <h1 class="mb-4">Admin Panel</h1>
         <header class="d-flex justify-content-between mb-4">
           <h2>Products</h2>
@@ -46,7 +45,6 @@ module.exports = ({ products }) => {
             ${renderedProducts}
           </tbody>
         </table>
-      </div>
     `,
   });
 };
