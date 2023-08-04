@@ -21,3 +21,8 @@
 .navbar {
   background-color: #631d76;
 }
+
+/* Keep the image's aspect ratio */
+.card-img-top {
+  object-fit: contain;
+}
