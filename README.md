@@ -2,13 +2,9 @@
 
 ![Ecommerce Web Application](https://res.cloudinary.com/dzzazpzrs/image/upload/v1690966680/Screenshot_79_ovbqt4.png)
 
-# Ecommerce Web Application
-
-The Ecommerce Web Application is a modern ecommerce app that has been upgraded to version 2. This version utilizes a more advanced data storage system and improved features for a seamless shopping experience.
-
 ## Description
 
-The Ecommerce Web Application is a JavaScript-based ecommerce app.In this version (version 2), several enhancements have been introduced to improve performance, security, and user interaction.
+Full Stack JavaScript ecommerce application with some new features refactored on the top of this [project](https://github.com/SagarPrasad160/ecomm-js).
 
 ### Features
 
